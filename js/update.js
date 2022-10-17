@@ -10,7 +10,9 @@ let listPost = (post) => {
 
     let date = new Date(post.updated);
     let localDate = date.toLocaleString("default", {day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"});
-
+    if (post.media == null) {
+        post.media = "";
+    }
     output.innerHTML = `
     <div class="card p-3">
     <p style="text-align: right;">${localDate}</p>   

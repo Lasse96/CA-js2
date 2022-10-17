@@ -30,6 +30,9 @@ let listPosts = (post) => {
 
     let dato = new Date(post.updated);
     let localDate = dato.toLocaleString("default", {day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"});
+    if (post.media == null) {
+        post.media = "";
+    }
     output.innerHTML = `
     <div class="card p-3">
     <p style="text-align: right;">${localDate}</p>   
@@ -39,6 +42,5 @@ let listPosts = (post) => {
     <img src="${post.media}">
     </div>
  `
-
-}
+};
 

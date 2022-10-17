@@ -33,7 +33,7 @@ let listPosts = (posts) => {
                 <but class="dropdown-toggle btn btn-secondary" type="but" data-bs-toggle="dropdown" aria-expanded="false">Edit</but>
                 <ul class="dropdown-menu">
                 <li><a href="./update.html?id=${post.id}" class="update btn" update="${post.id}">Update</a></li>
-                <li class="delete btn" delete="${post.id}">Delete</li>
+                <li class="delete btn" onclick="return confirm('Are you sure?');" delete="${post.id}">Delete</li>
                 </ul>
                 </div>`
         newPost += `
@@ -90,16 +90,18 @@ async function deletePost (url) {
 const inputField = document.getElementById("q");
 const searchbut = document.getElementById("search")
 searchbut.addEventListener("click", filterPosts);
-inputField.addEventListener('keydown', inputfieldkeydown);
-function inputfieldkeydown(e) {
-   if (e.keyCode == 13) {
-    filterPosts();
-   }
-};
+inputField.addEventListener('keydown', filterPosts);
+
+// inputField.addEventListener('keydown', inputfieldkeydown);
+
+// function inputfieldkeydown(e) {
+//    if (e.keyCode == 13) {                    Gjør at den gamle søkefunksjonen funker. altså at du må klikke Enter eller search.
+//     filterPosts();
+//    }
+// };
 
 function filterPosts () {
     const filterQuery = inputField.value.toLowerCase();
-    console.log(filterQuery);
     const filtered = allPosts.filter((post)=>{
         const t = `${post.title}`.toLowerCase();
         const a = `${post.body}`.toLowerCase();

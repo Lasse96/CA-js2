@@ -43,6 +43,12 @@ let validation = (e) => {
             usernameEr.innerHTML = "Please type a username";
         }
 
+        if (password.length >= 8) {
+            passwordValid = true;
+            passwordEr.innerHTML = "";
+        } else {
+            passwordEr.innerHTML = "Must include 8 characters";
+        }
 
     if (email.includes("@noroff.no") || email.includes("@stud.noroff.no")) {
             emailValid = true;
@@ -51,7 +57,7 @@ let validation = (e) => {
             emailEr.innerHTML = "Email does not work";
         }  
 
-        if (emailValid && passwordValid) {
+        if (emailValid && passwordValid && nameValid) {
             valid = true;  
             register(regUrl, userReg);
         }
@@ -69,9 +75,10 @@ async function register(url, userInfo) {
             body: JSON.stringify(userInfo),
         }
         const response = await fetch(url, post);
-        const json = await response.json();
-        } 
-        catch (error) {
+        if (response.ok == true) { 
+            window.location.href = "./login.html"; 
+        }
+    } catch (error) {
         console.log(error);
     }
 };
